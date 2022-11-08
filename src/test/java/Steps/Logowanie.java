@@ -37,6 +37,7 @@ public class Logowanie {
     @When("Uzytkownik klika przycisk Ligin")
     public void uzytkownik_klika_przycisk_ligin() {
         System.out.println("Uzytkownik klikaprzycisk login");
+        driver.findElement(By.class("Login")).click("radius");
     }
     @Then("Uzytkownik zostal poprawnie zalogowany")
     public void uzytkownik_zostal_poprawnie_zalogowany() {
