@@ -1,3 +1,4 @@
+@now
 Feature: Logowanie do aplikacji
 
   Jako uzytkownik chce miec mozliwość zalogowania się

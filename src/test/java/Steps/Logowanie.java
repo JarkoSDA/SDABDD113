@@ -1,5 +1,7 @@
 package Steps;
 
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,14 +12,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Logowanie {
 
-    WebDriver driver;
+    static WebDriver driver;
+
+    @BeforeAll
+    public static void setDriver(){
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+    }
+
 
     @Given("Uzytkownik otwiera przegladarke")
     public void test_uzytkownik_otwiera_przegladarke(){
         System.out.println("Uzytkownik otworzyl przegladarke");
         //System.setProperty("webdriver.chrome.driver", "C:/Users/Jarek/chromedriver_win32/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //driver = new ChromeDriver();
+        //driver.manage().window().maximize();
     }
     @Given("Uzytkownik wpisuje adres https:\\/\\/the-internet.herokuapp.com\\/login")
     public void uzytkownik_wpisuje_adres_https_the_internet_herokuapp_com_login() {
@@ -50,12 +59,16 @@ public class Logowanie {
     public void uzytkownik_zostal_poprawnie_zalogowany() {
         System.out.println("Uzytkownik zostal poprawnie zalogowany");
         Assert.assertEquals("https://the-internet.herokuapp.com/secure", driver.getCurrentUrl());
-        driver.close();
+        //driver.close();
     }
 
     @Then("Uzytkownik nie zostal poprawnie zalogowany")
     public void UzytkowniekNieZostalPoprawnieZalogowany(){
         System.out.println("Uzytkownik nie zostal poprawnie zalogowany");
         Assert.assertEquals("https://the-internet.herokuapp.com/login", driver.getCurrentUrl());
+    }
+    @AfterAll
+    public static void tearDown(){
+        driver.close();
     }
 }
