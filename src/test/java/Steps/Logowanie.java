@@ -14,7 +14,7 @@ public class Logowanie {
     @Given("Uzytkownik otwiera przegladarke")
     public void test_uzytkownik_otwiera_przegladarke(){
         System.out.println("Uzytkownik otworzyl przegladarke");
-        System.setProperty("webdriver.chrome.driver", "C:/Users/Jarek/chromedriver_win32/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:/Users/Jarek/chromedriver_win32/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -37,7 +37,7 @@ public class Logowanie {
     @When("Uzytkownik klika przycisk Ligin")
     public void uzytkownik_klika_przycisk_ligin() {
         System.out.println("Uzytkownik klikaprzycisk login");
-        driver.findElement(By.class("Login")).click("radius");
+        driver.findElement(By.tagName("button")).click();
     }
     @Then("Uzytkownik zostal poprawnie zalogowany")
     public void uzytkownik_zostal_poprawnie_zalogowany() {
