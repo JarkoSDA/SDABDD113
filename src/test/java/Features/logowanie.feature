@@ -21,7 +21,7 @@ Feature: Logowanie do aplikacji
     Then Uzytkownik nie zostal poprawnie zalogowany
 
 
-    @now
+
   Scenario: Poprawne logowanie do aplikacji (druga wersja)
     Given Uzytkownik otwiera przegladarke
     And Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
@@ -29,4 +29,23 @@ Feature: Logowanie do aplikacji
     And Uzytkownik wpisuje "SuperSecretPassword!" w pole haslo
     And Uzytkownik klika przycisk Login
     Then Uzytkownik zostal poprawnie zalogowany
+
+
+  Scenario: Nieoprawne logowanie do aplikacji (druga wersja)
+    Given Uzytkownik otwiera przegladarke
+    And Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    When Uzytkownik wpisuje "tomsmith" w pole username
+    And Uzytkownik wpisuje "bla" w pole haslo
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik nie zostal poprawnie zalogowany
+
+
+  @now
+  Scenario: Nieoprawne logowanie do aplikacji (druga wersja)
+    Given Uzytkownik otwiera przegladarke
+    And Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    When Uzytkownik wpisuje "    " w pole username
+    And Uzytkownik wpisuje "    " w pole haslo
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik nie zostal poprawnie zalogowany
 
