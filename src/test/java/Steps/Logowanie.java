@@ -1,6 +1,7 @@
 package Steps;
 
 import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,14 +11,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.net.URL;
+
 public class Logowanie {
 
     static WebDriver driver;
 
     @BeforeAll
     public static void setDriver(){
+        System.out.println("Uruchomienie przegladarki przed wszystkimi scenariuszami testowymi");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+
+    @Before
+    public void before(){
+        System.out.println("Uruchomienie przegladarki przed każdym scenariuszem testowym");
     }
 
 
@@ -32,6 +41,11 @@ public class Logowanie {
     public void uzytkownik_wpisuje_adres_https_the_internet_herokuapp_com_login() {
         System.out.println("Uzytkownik wpisuje adres strony internetowej");
         driver.navigate().to("https://the-internet.herokuapp.com/login");
+    }
+
+     @Given("Uzytkownik wpisuje adres {string}")
+     public void UzytkownikWpisujeAdres(String url)   {
+         driver.navigate().to(url );
 
     }
     @When("Uzytkownik wpisuje poprawny username")
@@ -39,10 +53,20 @@ public class Logowanie {
         System.out.println("Uzytkownik wpisuje poprawny login");
         driver.findElement(By.id("username")).sendKeys("tomsmith");
     }
+    @When("Uzytkownik wpisuje {string} w pole username")
+    public void UzytkownikWpisujeWPoleUsername (String nazwaUzytkownika) {
+        driver.findElement(By.id("username")).sendKeys(nazwaUzytkownika);
+    }
     @When("Uzytkownik wpisuje poprawne haslo")
     public void uzytkownik_wpisuje_poprawne_haslo() {
         System.out.println("Uzytkownik wpisuje poprawne haslo");
         driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+    }
+
+        @When("Uzytkownik wpisuje {string} w pole haslo")
+        public void uzytkownik_wpisuje_w_pole_haslo (String haslo) {
+            driver.findElement(By.id("password")).sendKeys(haslo);
+
 
     }
     @When("Uzytkownik wpisuje niepoprawne haslo")

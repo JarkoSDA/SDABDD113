@@ -1,4 +1,3 @@
-@now
 Feature: Logowanie do aplikacji
 
   Jako uzytkownik chce miec mozliwość zalogowania się
@@ -20,4 +19,14 @@ Feature: Logowanie do aplikacji
     And Uzytkownik wpisuje niepoprawne haslo
     And Uzytkownik klika przycisk Login
     Then Uzytkownik nie zostal poprawnie zalogowany
+
+
+    @now
+  Scenario: Poprawne logowanie do aplikacji (druga wersja)
+    Given Uzytkownik otwiera przegladarke
+    And Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    When Uzytkownik wpisuje "tomsmith" w pole username
+    And Uzytkownik wpisuje "SuperSecretPassword!" w pole haslo
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik zostal poprawnie zalogowany
 
