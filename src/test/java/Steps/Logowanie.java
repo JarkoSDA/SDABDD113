@@ -3,6 +3,7 @@ package Steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,8 +34,14 @@ public class Logowanie {
     public void uzytkownik_wpisuje_poprawne_haslo() {
         System.out.println("Uzytkownik wpisuje poprawne haslo");
         driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+
     }
-    @When("Uzytkownik klika przycisk Ligin")
+    @When("Uzytkownik wpisuje niepoprawne haslo")
+    public void uzytkownikWpisujeNiePoprawneHaslo(){
+        System.out.println("Uzytkownik wpisuje niepoprawne haslo");
+        driver.findElement(By.id("password")).sendKeys("haslo");
+    }
+    @When("Uzytkownik klika przycisk Login")
     public void uzytkownik_klika_przycisk_ligin() {
         System.out.println("Uzytkownik klikaprzycisk login");
         driver.findElement(By.tagName("button")).click();
@@ -42,5 +49,13 @@ public class Logowanie {
     @Then("Uzytkownik zostal poprawnie zalogowany")
     public void uzytkownik_zostal_poprawnie_zalogowany() {
         System.out.println("Uzytkownik zostal poprawnie zalogowany");
+        Assert.assertEquals("https://the-internet.herokuapp.com/secure", driver.getCurrentUrl());
+        driver.close();
+    }
+
+    @Then("Uzytkownik nie zostal poprawnie zalogowany")
+    public void UzytkowniekNieZostalPoprawnieZalogowany(){
+        System.out.println("Uzytkownik nie zostal poprawnie zalogowany");
+        Assert.assertEquals("https://the-internet.herokuapp.com/login", driver.getCurrentUrl());
     }
 }
