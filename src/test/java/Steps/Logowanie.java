@@ -3,6 +3,7 @@ package Steps;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -91,8 +92,22 @@ public class Logowanie {
         System.out.println("Uzytkownik nie zostal poprawnie zalogowany");
         Assert.assertEquals("https://the-internet.herokuapp.com/login", driver.getCurrentUrl());
     }
-    @AfterAll
-    public static void tearDown(){
-        driver.close();
+
+
+
+        @When("^Uzytkownik wpisuje (.+) w pole username$")
+        public void uzytkownik_wpisuje_w_pole_username2(String nazwauzytkownika) {
+            driver.findElement(By.id("username")).sendKeys(nazwauzytkownika);
+        }
+
+        @And("^Uzytkownik wpisuje (.+) w pole haslo$")
+        public void uzytkownik_wpisuje_w_pole_haslo2(String haslo) {
+            driver.findElement(By.id("password")).sendKeys(haslo);
+        }
+
+        @AfterAll
+        public static void tearDown() {
+            driver.close();
+        }
     }
-}
+
